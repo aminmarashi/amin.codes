@@ -27,7 +27,7 @@ const IndexPage = () => {
         <main>
           <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div className="text-center grid grid-cols-1 gap-4 justify-items-center">
-              <img className="rounded-full" alt="Amin's profile" src={Amin} />
+              <img className="rounded-full shadow-lg shadow-gray-300 dark:shadow-gray-700" alt="Amin's profile" src={Amin} />
               <h3 className="mt-1 font-extrabold text-gray-900 dark:text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
                 Amin Codes
               </h3>
