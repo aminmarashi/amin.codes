@@ -23,24 +23,18 @@ const IndexPage = () => {
   const snack = _.sample(dutchFood);
   return (
     <React.Fragment>
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: `var(--size-content)`,
-          padding: `var(--size-gutter)`,
-        }}
-      >
+      <div className="dark:bg-slate-900 h-screen">
         <main>
           <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div className="text-center grid grid-cols-1 gap-4 justify-items-center">
               <img className="rounded-full" alt="Amin's profile" src={Amin} />
-              <h3 className="mt-1 font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+              <h3 className="mt-1 font-extrabold text-gray-900 dark:text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
                 Amin Codes
               </h3>
               <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
-              <p>
+              <p className="dark:text-gray-400">
                 Write to <Link to="mailto:me@amin.codes">me@amin.codes</Link> or follow me on <Link to="https://github.com/aminmarashi">GitHub</Link>
               </p>
             </div>
