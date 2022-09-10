@@ -35,7 +35,7 @@ const IndexPage = () => {
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
               <p className="dark:text-gray-400">
-                Write to <Link to="mailto:me@amin.codes">me@amin.codes</Link> or follow me on <Link to="https://github.com/aminmarashi">GitHub</Link>
+                I also sometimes write about things, read my <Link to="https://blog.amin.codes">blog</Link>, follow me on <Link to="https://github.com/aminmarashi">GitHub</Link> or write to <Link to="mailto:me@amin.codes">me@amin.codes</Link>
               </p>
             </div>
           </div>
