@@ -35,7 +35,7 @@ const IndexPage = () => {
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
               <p className="dark:text-gray-400">
-                I also sometimes write about things, read my <Link to="https://blog.amin.codes">blog</Link>, follow me on <Link to="https://github.com/aminmarashi">GitHub</Link> or write to <Link to="mailto:me@amin.codes">me</Link>. I keep a list of my favourite things <Link to="https://amin-codes.notion.site/amin-codes/Amin-s-Favourites-3c68c27b9ec54c1ca2f9449e317625bd">here</Link>.
+                I also sometimes write about things, read my <Link to="https://blog.amin.codes">blog</Link>, follow me on <Link to="https://github.com/aminmarashi">GitHub</Link> or write to <Link to="mailto:me@amin.codes">me</Link>. I keep a list of my favourite things <Link to="https://fav.amin.codes">here</Link>.
               </p>
             </div>
           </div>
