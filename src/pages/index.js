@@ -34,9 +34,23 @@ const IndexPage = () => {
               <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
-              <p className="dark:text-gray-400">
-                I also sometimes write about things, read my <Link to="https://blog.amin.codes">blog</Link>, follow me on <Link to="https://github.com/aminmarashi">GitHub</Link> or write to <Link to="mailto:me@amin.codes">me</Link>. I keep a list of my favourite things <Link to="https://fav.amin.codes">here</Link>.
-              </p>
+              <div className="grid sm:grid-cols-1 md:grid-cols-5 lg:divide-x auto-cols-fr mt-5 dark:text-gray-400">
+                <Link to="https://blog.amin.codes" title="Amin's personal blog">
+                  Blog
+                </Link>
+                <Link to="https://github.com/aminmarashi" title="Amin's Github profile">
+                  GitHub
+                </Link>
+                <Link to="mailto:me@amin.codes" title="Mail something to Amin, delivers very fast">
+                  Email
+                </Link>
+                <Link to="https://fav.amin.codes" title="Links to Amin's favourite things on the internet">
+                  Favourites
+                </Link>
+                <Link to="https://www.rubberduck.so/" className="px-4" title="Amin's weekly digest of tech news, with less noise">
+                  Rubberduck
+                </Link>
+              </div>
             </div>
           </div>
         </main>
