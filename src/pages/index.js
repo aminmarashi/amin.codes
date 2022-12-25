@@ -1,8 +1,7 @@
-import { Link } from "gatsby";
+import * as _ from "lodash";
 import * as React from "react";
 import Amin from '../images/amin.jpeg';
 import '../styles/global.css';
-import * as _ from "lodash";
 
 const dutchFood = [
   'stroopwafels',
@@ -35,21 +34,12 @@ const IndexPage = () => {
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
               <div className="grid sm:grid-cols-1 md:grid-cols-5 lg:divide-x auto-cols-fr mt-5 dark:text-gray-400">
-                <Link to="https://blog.amin.codes" title="Amin's personal blog">
-                  Blog
-                </Link>
-                <Link to="https://github.com/aminmarashi" title="Amin's Github profile">
-                  GitHub
-                </Link>
-                <Link to="mailto:me@amin.codes" title="Mail something to Amin, delivers very fast">
-                  Email
-                </Link>
-                <Link to="https://fav.amin.codes" title="Links to Amin's favourite things on the internet">
-                  Favourites
-                </Link>
-                <Link to="https://www.rubberduck.so/" className="px-4" title="Amin's weekly digest of tech news, with less noise">
+                <a rel="me" href="https://blackrock.city/@amin">Mastodon</a>
+                <a href="https://linkedin.com/in/amin-codes" title="Amin's Linkedin profile">Linkedin</a>
+                <a href="https://github.com/aminmarashi" title="Amin's Github profile">GitHub</a>
+                <a href="https://www.rubberduck.so/" className="px-4" title="Amin's weekly digest of tech news, with less noise">
                   Rubberduck
-                </Link>
+                </a>
               </div>
             </div>
           </div>
