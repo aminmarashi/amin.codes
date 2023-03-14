@@ -35,8 +35,11 @@ const IndexPage = () => {
               </p>
               <div className="grid sm:grid-cols-1 md:grid-cols-5 lg:divide-x auto-cols-fr mt-5 dark:text-gray-400">
                 <a rel="me" href="https://blackrock.city/@amin">Mastodon</a>
-                <a href="https://linkedin.com/in/amin-codes" title="Amin's Linkedin profile">Linkedin</a>
+                <a href="https://www.youtube.com/@prpodcast01" className="px-4" title="PR Podcast in which me and Arash talk about tech">
+                  PR Podcast
+                </a>
                 <a href="https://github.com/aminmarashi" title="Amin's Github profile">GitHub</a>
+                <a href="https://linkedin.com/in/amin-codes" title="Amin's Linkedin profile">Linkedin</a>
                 <a href="https://www.rubberduck.so/" className="px-4" title="Amin's weekly digest of tech news, with less noise">
                   Rubberduck
                 </a>
