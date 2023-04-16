@@ -38,9 +38,9 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
-    "start": "gatsby develop",
+    "start": "gatsby dev",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "gatsby build && echo 'amin.codes' > ./public/CNAME && gh-pages -d public -b static",
