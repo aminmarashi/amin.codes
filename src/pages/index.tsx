@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import * as React from "react";
+// @ts-ignore
 import Amin from '../images/amin.jpeg';
 import '../styles/global.css';
 
