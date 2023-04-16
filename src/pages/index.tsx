@@ -31,7 +31,7 @@ const IndexPage = () => {
               <h3 className="mt-1 font-extrabold text-gray-900 dark:text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
                 Amin Codes
               </h3>
-              <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+              <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500" suppressHydrationWarning={true} >
                 A software developer, enjoying {snack} in Amsterdam and writing code.
               </p>
               <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-5 lg:divide-x auto-cols-fr mt-5 dark:text-gray-400">
