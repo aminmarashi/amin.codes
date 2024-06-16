@@ -49,7 +49,7 @@ const IndexPage = () => {
                 A software developer, enjoying {snack} in Amsterdam and writing
                 code.
               </p>
-              <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-5 lg:divide-x auto-cols-fr mt-5 dark:text-gray-400">
+              <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3 auto-cols-fr mt-5 dark:text-gray-400">
                 <a
                   href="https://github.com/aminmarashi"
                   title="Amin's Github profile"
