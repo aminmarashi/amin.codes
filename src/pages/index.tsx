@@ -11,12 +11,19 @@ const dutchFood = [
   "pepernoten",
   "krentenbollen",
   "poffertjes",
-  "appeltaart",
   "haring",
   "bitterballen",
   "kaas",
   "pindakaas",
   "oliebollen",
+  "frikandel",
+  "kroket",
+  "pannenkoeken",
+  "tompouce",
+  "kibbeling",
+  "mosselen",
+  "nasi",
+  "kapsalon",
 ]
 
 const IndexPage = () => {
