@@ -63,11 +63,11 @@ const IndexPage = () => {
                   Linkedin
                 </a>
                 <a
-                  href="https://blog.amin.codes/"
+                  href="https://workout.amin.codes/"
                   className="px-4"
-                  title="Personal opinions posted on the Internet in form of a blog"
+                  title="My personal workout routine optimized for a programming lifestyle."
                 >
-                  Blog
+                  Workout
                 </a>
               </div>
             </div>
