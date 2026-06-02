@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amin Marashi · engineering history</title>
+<meta name="description" content="Amin Marashi: an engineering history drawn as a git log graph. Roles, projects, packages, certifications, and education across backend, cloud, frontend, and AI work.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://amin.codes">
+<meta property="og:title" content="Amin Marashi · engineering history">
+<meta property="og:description" content="An engineering history drawn as a git log graph: roles, projects, packages, certifications, and education.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Crect%20width='16'%20height='16'%20rx='3'%20fill='%2316181d'/%3E%3Cg%20fill='none'%20stroke='%236fae8e'%20stroke-width='1.4'%20stroke-linecap='round'%3E%3Cpath%20d='M4.5%204.4V11.6'/%3E%3Cpath%20d='M4.5%208q0-3.2%203.4-3.2H10'/%3E%3C/g%3E%3Cg%20fill='%236fae8e'%3E%3Ccircle%20cx='4.5'%20cy='3.4'%20r='1.5'/%3E%3Ccircle%20cx='4.5'%20cy='12.6'%20r='1.5'/%3E%3Ccircle%20cx='11'%20cy='4.8'%20r='1.5'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#16181d; --bg-raised:#1b1e25; --bg-chip:#202430;
+    --border:#2a2e38; --border-soft:#23262f;
+    --fg:#c7cad2; --fg-dim:#878d99; --fg-faint:#5e636e; --fg-bright:#e8eaef;
+    --c-work:#9aa1ad; --c-project:#6fae8e; --c-package:#c2a15e; --c-cert:#6f93c4; --c-education:#a98ec0;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --gutterW:142px;
+  }
+  *{box-sizing:border-box;}
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:var(--mono); font-size:14px; line-height:1.55;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:980px; margin:0 auto; padding:40px 28px 96px; }
+
+  /* ---------- header ---------- */
+  header{ margin-bottom:30px; }
+  .name{ font-family:var(--sans); font-weight:650; font-size:30px; letter-spacing:-0.015em; color:var(--fg-bright); margin:0; }
+  .role{ font-family:var(--sans); font-size:15px; color:var(--fg-dim); margin:6px 0 0; }
+  .tagline{ font-size:14px; color:var(--fg); margin:14px 0 0; }
+  .hubs{ list-style:none; display:flex; flex-wrap:wrap; gap:8px 18px; padding:0; margin:16px 0 0; font-size:13px; }
+  .hubs a{ color:var(--fg-dim); text-decoration:none; border-bottom:1px solid transparent; padding-bottom:1px; transition:color .12s, border-color .12s; }
+  .hubs a:hover, .hubs a:focus-visible{ color:var(--fg-bright); border-bottom-color:var(--border); }
+  .hubs .k{ color:var(--fg-faint); }
+
+  .legend{ display:flex; flex-wrap:wrap; gap:6px 18px; margin:22px 0 0; font-size:12px; color:var(--fg-dim); }
+  .legend span{ display:inline-flex; align-items:center; gap:7px; }
+  .legend i{ width:11px; height:11px; border-radius:50%; flex:0 0 auto; }
+
+  /* ---------- controls ---------- */
+  .controls{ margin:30px 0 6px; border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); padding:16px 0; display:flex; flex-direction:column; gap:14px; }
+  .ctl-row{ display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .ctl-label{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-faint); flex:0 0 64px; padding-top:3px; }
+  .seg{ display:flex; flex-wrap:wrap; gap:6px; }
+  .seg button, .chip{
+    font-family:var(--mono); font-size:12.5px; color:var(--fg-dim);
+    background:var(--bg-chip); border:1px solid var(--border-soft); border-radius:3px;
+    padding:4px 10px; cursor:pointer; transition:color .12s,border-color .12s,background .12s;
+  }
+  .seg button:hover, .chip:hover{ color:var(--fg-bright); border-color:var(--border); }
+  .seg button[aria-pressed="true"]{ color:var(--bg); background:var(--fg-bright); border-color:var(--fg-bright); }
+  .seg button .sw{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; box-shadow:0 0 0 1px rgba(0,0,0,.3); }
+  .chip[aria-pressed="true"]{ color:var(--fg-bright); border-color:var(--fg-dim); background:var(--bg-raised); }
+  .chip .n{ color:var(--fg-faint); margin-left:6px; font-size:11px; }
+  .chip[aria-pressed="true"] .n{ color:var(--fg-dim); }
+  .tagcats{ display:flex; flex-direction:column; gap:8px; flex:1 1 auto; min-width:0; }
+  .catpanels{ display:flex; flex-direction:column; gap:8px; }
+  .ctl-foot{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+  .count{ font-size:12px; color:var(--fg-dim); }
+  .reset{ font-family:var(--mono); font-size:12px; color:var(--fg-dim); background:none; border:1px solid var(--border-soft); border-radius:3px; padding:4px 10px; cursor:pointer; }
+  .reset:hover{ color:var(--fg-bright); border-color:var(--border); }
+
+  /* ---------- column header ---------- */
+  .colhead{ display:flex; align-items:baseline; gap:12px; margin:26px 0 8px; padding-left:2px; }
+  .colhead .h{ font-family:var(--sans); font-size:13px; letter-spacing:.04em; text-transform:uppercase; color:var(--fg-dim); }
+  .colhead .cmd{ font-size:12.5px; color:var(--fg-faint); }
+
+  /* ---------- timeline ---------- */
+  ol.log{ list-style:none; margin:0; padding:0; }
+  li.row{ display:flex; align-items:stretch; }
+  .gutter{ flex:0 0 var(--gutterW); width:var(--gutterW); position:relative; }
+  .gutter svg{ position:absolute; inset:0; display:block; overflow:visible; }
+  .gutter .fallback-rail{ position:absolute; left:18px; top:0; bottom:0; width:1px; background:var(--border); }
+  body.js .gutter .fallback-rail{ display:none; }
+
+  .node{ flex:1 1 auto; min-width:0; padding:0 0 4px; }
+  .head{
+    display:flex; align-items:baseline; gap:12px; width:100%;
+    background:none; border:0; padding:7px 6px 7px 0; margin:0;
+    font-family:var(--mono); color:var(--fg); text-align:left; cursor:default;
+    border-radius:3px;
+  }
+  body.js .head{ cursor:pointer; }
+  body.js .head:hover{ background:var(--bg-raised); }
+  .head .date{ flex:0 0 auto; font-size:12.5px; color:var(--fg-faint); font-variant-numeric:tabular-nums; min-width:72px; }
+  .head .subject{ flex:1 1 auto; min-width:0; font-size:13.5px; color:var(--fg-bright); }
+  .head .subject b{ font-weight:600; }
+  .head .ref{ font-size:11px; color:var(--fg-faint); border:1px solid var(--border); border-radius:2px; padding:0 5px; flex:0 0 auto; align-self:center; }
+  .head .chev{ flex:0 0 auto; color:var(--fg-faint); font-size:11px; width:12px; text-align:center; opacity:0; transition:transform .12s; }
+  body.js .head .chev{ opacity:1; }
+  body.js .head[aria-expanded="true"] .chev{ transform:rotate(90deg); }
+  .head:focus-visible, .chip:focus-visible, .seg button:focus-visible, .reset:focus-visible, .pill:focus-visible, .tag:focus-visible, .marker:focus-visible{
+    outline:2px solid var(--c-cert); outline-offset:2px;
+  }
+
+  .detail{ padding:2px 6px 16px 0; max-width:62ch; }
+  .detail .meta{ font-size:12.5px; color:var(--fg-dim); margin:0 0 10px; }
+  .detail .body{ font-size:13px; color:var(--fg); margin:0; }
+  .detail .body p{ margin:0 0 9px; }
+  .detail .body ul{ margin:0; padding:0; list-style:none; }
+  .detail .body li{ position:relative; padding-left:16px; margin:0 0 8px; }
+  .detail .body li::before{ content:"·"; position:absolute; left:4px; color:var(--fg-faint); }
+  .detail .sh{ color:var(--fg-bright); }
+
+  .tags{ list-style:none; display:flex; flex-wrap:wrap; gap:6px; padding:0; margin:13px 0 0; }
+  .tag{ font-family:var(--mono); font-size:11.5px; color:var(--fg-dim); background:var(--bg-chip); border:1px solid var(--border-soft); border-radius:3px; padding:2px 8px; cursor:default; }
+  body.js .tag{ cursor:pointer; }
+  body.js .tag:hover{ color:var(--fg-bright); border-color:var(--border); }
+  .tag[aria-pressed="true"]{ color:var(--fg-bright); border-color:var(--fg-dim); background:var(--bg-raised); }
+
+  .links{ display:flex; flex-wrap:wrap; gap:8px; margin:13px 0 0; }
+  .pill{ display:inline-flex; align-items:center; gap:6px; font-size:11.5px; color:var(--fg-dim); text-decoration:none; background:var(--bg-chip); border:1px solid var(--border-soft); border-radius:3px; padding:3px 10px; transition:color .12s,border-color .12s; }
+  .pill::before{ content:""; width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.6; }
+  .pill:hover{ color:var(--fg-bright); border-color:var(--border); }
+
+  /* marker (collapsed cluster) */
+  li.marker-row .head{ cursor:pointer; color:var(--fg-dim); }
+  li.marker-row .subject{ color:var(--fg-dim); font-size:13px; }
+  li.marker-row.has-match .subject{ color:var(--fg-bright); }
+
+  /* emphasis / filtering */
+  .dim .node{ opacity:.26; filter:grayscale(.7); transition:opacity .15s, filter .15s; }
+  .node{ transition:opacity .15s, filter .15s; }
+  .dim .head .subject{ color:var(--fg-dim); }
+  li.dim .gutter .ndot{ opacity:.28; transition:opacity .15s; }
+
+  @media (max-width:620px){
+    .wrap{ padding:28px 16px 80px; }
+    :root{ --gutterW:120px; }
+    .head{ flex-wrap:wrap; gap:2px 10px; }
+    .head .date{ min-width:0; flex-basis:100%; }
+    .ctl-label{ flex-basis:100%; }
+  }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 class="name">Amin Marashi</h1>
+    <p class="role">Senior Software Engineer @ New10 (ABN AMRO), Amsterdam</p>
+    <p class="tagline">Builder of things. Ideally useful ones.</p>
+    <p class="role" style="margin-top:10px">Speaks Persian, English, and Dutch (B2).</p>
+    <ul class="hubs">
+      <li><span class="k">site</span> <a href="https://amin.codes" target="_blank" rel="noopener">amin.codes</a></li>
+      <li><span class="k">github</span> <a href="https://github.com/aminmarashi" target="_blank" rel="noopener">github.com/aminmarashi</a></li>
+      <li><span class="k">linkedin</span> <a href="https://www.linkedin.com/in/amin-codes" target="_blank" rel="noopener">in/amin-codes</a></li>
+      <li><span class="k">email</span> <a href="mailto:me@amin.codes">me@amin.codes</a></li>
+    </ul>
+  </header>
+
+  <section class="controls" id="controls" hidden aria-label="Filters">
+    <div class="ctl-row">
+      <span class="ctl-label" id="catlabel">Category</span>
+      <div class="seg" role="group" aria-labelledby="catlabel" id="catseg"></div>
+    </div>
+    <div class="ctl-row">
+      <span class="ctl-label" id="taglabel">Tech</span>
+      <div class="tagcats" role="group" aria-labelledby="taglabel" id="tagseg"></div>
+    </div>
+    <div class="ctl-foot">
+      <span class="count" id="count" aria-live="polite"></span>
+      <button class="reset" id="reset" type="button">Reset · All</button>
+    </div>
+  </section>
+
+  <div class="colhead">
+    <span class="h">history</span>
+    <span class="cmd">git log --graph</span>
+  </div>
+
+  <ol class="log" id="log">
+
+    <li class="row" data-cat="work" data-ref="HEAD" data-tags="TypeScript,AWS,Serverless,Terraform,Node.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2022-10</span><span class="subject"><b>New10 (ABN AMRO)</b>: Senior Software Engineer</span><span class="ref">HEAD</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Amsterdam, NL. Risk-management domain.</p>
+          <div class="body"><ul>
+            <li>Replaced legacy systems with simpler, faster, more cost-efficient ones, improving two key company metrics.</li>
+            <li>Owned security: cleared the team's vulnerability backlog and set up recurring triage and alerting (Sentry, Datadog, PagerDuty).</li>
+            <li>Drove quality: introduced integration and end-to-end testing, test-first TDD, and an &gt;80% coverage gate (Cypress, GitLab CI).</li>
+            <li>Initiated tech-week items focused on the team's technical health.</li>
+            <li>Shared knowledge through company-wide engineering talks, and ran technical interviews.</li>
+            <li>Built serverless backends on AWS (Lambda, API Gateway, SNS, CloudFormation) with Terraform, and strengthened API request/response validation. Made services runnable and testable locally, and cut build times.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="Rust,Serverless,LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2026-03</span><span class="subject"><b>Rust serverless platform</b>: personal product</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A personal product with backends written entirely in Rust: a game-creation engine on a serverless runtime built around security and scalability. Uses Anthropic and OpenAI models under the hood.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="package" data-tags="JavaScript,Node.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2022-08</span><span class="subject"><b>js-interpreter</b>: maintained npm package</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Maintain Neil Fraser's JS-Interpreter as an npm package, with an added command-line tool. About 5,600 downloads a week.</p></div>
+          <ul class="tags"></ul>
+          <div class="links">
+            <a class="pill" href="https://www.npmjs.com/package/js-interpreter" target="_blank" rel="noopener">npm</a>
+            <a class="pill" href="https://github.com/aminmarashi/JS-Interpreter" target="_blank" rel="noopener">repo</a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>cerebro</b>: Claude agent orchestrator</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A Claude-based orchestrator that coordinates multiple coding agents, keeps their history, and prepares reviewed, ready-to-merge code changes.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c1" data-tags="LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>codex-proxy</b>: Claude Code to Codex bridge</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Bridges the Claude Code CLI and an OpenAI Codex subscription.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/codex-proxy" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c1" data-tags="LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>ai-tools</b>: command-line helpers for AI agents</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Small command-line utilities that smooth out AI coding-agent workflows.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/ai-tools" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="certification" data-tags="AWS">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2025-12</span><span class="subject"><b>AWS Certified Solutions Architect</b>: Professional</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Issued Dec 2025.</p></div>
+          <div class="links"><a class="pill" href="https://www.linkedin.com/in/amin-codes/details/certifications/" target="_blank" rel="noopener">cert</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="certification" data-cluster="c2" data-tags="">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2024-10</span><span class="subject"><b>Domain-Driven Design</b>: O'Reilly</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Issued Oct 2024.</p></div>
+          <div class="links"><a class="pill" href="https://www.linkedin.com/in/amin-codes/details/certifications/" target="_blank" rel="noopener">cert</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="certification" data-cluster="c2" data-tags="AWS">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2024-04</span><span class="subject"><b>AWS Certified Solutions Architect</b>: Associate</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Issued Apr 2024.</p></div>
+          <div class="links"><a class="pill" href="https://www.linkedin.com/in/amin-codes/details/certifications/" target="_blank" rel="noopener">cert</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="ML,Swift">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2023-11</span><span class="subject"><b>lit-feed</b>: ML-personalized article reader</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>An article feed reader that uses machine learning to filter and rank articles to each reader's preferences. iOS app in Swift.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/lit-feed-ios" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="JavaScript,LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>chat.lit.codes</b>: GPT chat web app</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A GPT chat web app with end-to-end-encrypted history, plus a command that lets the model read the current web page.</p></div>
+          <div class="links"><a class="pill" href="https://chat.lit.codes" target="_blank" rel="noopener">live</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="JavaScript,LLMs">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>Chat with OpenAI API</b>: Chrome extension</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Summarize or ask questions about the current web page using an OpenAI API key.</p></div>
+          <div class="links"><a class="pill" href="https://chromewebstore.google.com/detail/chat-with-openai-api/bdaanmhmamgpeppfdajedeliilghopol" target="_blank" rel="noopener">store</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="work" data-tags="TypeScript,AWS,CDK">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2021-06</span><span class="subject"><b>Fashion Cloud</b>: Senior Software Engineer</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Amsterdam, NL.</p>
+          <div class="body"><ul>
+            <li>Built and scaled an internal data pipeline, splitting stages into their own container deployments (AWS ECS).</li>
+            <li>Orchestrated it with AWS Step Functions and infrastructure-as-code (CDK); joined the on-call rotation.</li>
+            <li>Researched UI alternatives for the data-transformation tooling.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="certification" data-tags="AWS">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2022-02</span><span class="subject"><b>AWS Certified Developer</b>: Associate</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Issued Feb 2022.</p></div>
+          <div class="links"><a class="pill" href="https://www.linkedin.com/in/amin-codes/details/certifications/" target="_blank" rel="noopener">cert</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="work" data-tags="AWS,GCP,Docker,PostgreSQL,BigQuery,Airflow,Chef,Perl">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2019-12</span><span class="subject"><b>Deriv.com</b>: DevOps Tech Lead</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Cyberjaya, Malaysia.</p>
+          <div class="body"><ul>
+            <li>Built a release manager (on Chef + Slack) that coordinated releases across hundreds of servers (AWS EC2). Led a team of senior PostgreSQL engineers, and ran an in-house git server synced between GitLab and GitHub.</li>
+            <li>Migrated the business-intelligence (BI) stack, including a 2 TB reporting database, from company servers to Google Cloud (GCP) with minutes of downtime. Docker Swarm; Metabase + Airflow + BigQuery; cut cloud costs by thousands a month. Tested point-in-time-recovery (PITR) backups and hardened the databases.</li>
+            <li>Built integration and automation across Trello, GitHub, and Redmine to streamline tagging and releases. Round-the-clock on-call.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="education" data-tags="AWS,Docker">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2020-05</span><span class="subject"><b>Udacity</b>: Cloud DevOps Engineer Nanodegree</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Cloud DevOps Engineer Nanodegree.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="work" data-tags="JavaScript,React,WebSocket,Perl,Redis,Babel,Webpack,Mojolicious,Node.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>Binary.com (later Deriv.com)</b>: Full-Stack Engineer</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Cyberjaya, Malaysia.</p>
+          <div class="body"><ul>
+            <li>Built the most successful Binary.com front-end trading app on its real-time WebSocket API. It generated millions in annual revenue.</li>
+            <li>Modernized the JavaScript front end: moved the static site to Webpack/Babel/ES6, published the team's code-style config, and added in-context translation (i18n).</li>
+            <li>Built an internal Perl framework for asynchronous integration and load testing.</li>
+            <li>Conducted online code-challenge screenings for backend hiring.</li>
+            <li>Know-your-customer (KYC) document uploader: streamed uploads to Amazon S3 over WebSocket (Mojolicious/Perl).</li>
+            <li>Brief database-administration stint (2019-04): set up read replicas and made the integration test suite 5× faster.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="package" data-tags="JavaScript,WebSocket,RxJS,Node.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>@deriv/deriv-api</b>: Deriv WebSocket API</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Designed and built Deriv's WebSocket API client: a reactive JavaScript library (RxJS) that made the real-time trading API easier to use, plus its documentation. About 5,600 npm downloads a week.</p></div>
+          <div class="links">
+            <a class="pill" href="https://www.npmjs.com/package/@deriv/deriv-api" target="_blank" rel="noopener">npm</a>
+            <a class="pill" href="https://github.com/binary-com/deriv-api" target="_blank" rel="noopener">repo</a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="JavaScript,Blockly,WebSocket,Redux,React,Node.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>Deriv Bot</b>: visual auto-trading tool</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Proposed and built a visual auto-trading tool on Google Blockly, with a companion CLI (Redux, React, Node.js).</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/binary-bot" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>pomodoro</b>: cross-device timer</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A Pomodoro timer that syncs across your devices.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/pomodoro" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>seen</b>: email open-receipt service</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Email open-tracking and read-receipt service.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/seen" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="Bash">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2018-03</span><span class="subject"><b>avail-test</b>: availability-test runner</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A platform-agnostic tool to run and monitor availability tests (Bash).</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/avail-test" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="AngularJS,Chart.js,Ionic,JavaScript">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2015-07</span><span class="subject"><b>Trading-app charts and dashboards</b>: AngularJS</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>AngularJS user dashboards on a REST API, and canvas charts for a mobile trading app (Chart.js, Ionic).</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="Python,Flask,Swagger,AWS,Lambda">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2015-06</span><span class="subject"><b>REST API in Python</b>: Flask + Swagger</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>RESTful API design, testing, and documentation in Python (Flask, Swagger, AWS Lambda).</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="JavaScript,D3.js,AWS,DynamoDB,Lambda">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2014-05</span><span class="subject"><b>RADIUS auth-log dashboard</b>: D3.js</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A dashboard for network-authentication (RADIUS) logs, built with D3.js over data streamed through DynamoDB Streams and AWS Lambda.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="Python,Kivy">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2014-03</span><span class="subject"><b>Audiobook creator</b>: Python/Kivy</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A cross-platform audiobook creator for Android and iOS, built in Python with the Kivy framework.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="FreeBSD">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2014-01</span><span class="subject"><b>IPv6 headers in FreeBSD</b>: IETF draft</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Authored an IETF (internet-standards body) draft for IPv6 headers in the FreeBSD kernel.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="Python,Django">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2013-07</span><span class="subject"><b>Reporting tool</b>: Django</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Reporting and support tooling built with Django.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="JavaScript,D3.js">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2013-05</span><span class="subject"><b>Radar monitoring dashboard</b>: D3.js</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A monitoring dashboard for a short-range radar system, built with D3.js.</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="education" data-tags="SELinux,Qt,FPGA,Verilog,Linux,C++">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2009-09</span><span class="subject"><b>Shiraz University</b>: B.Sc. Computer Engineering</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Computer Engineering, hardware and computer-architecture major.</p><ul>
+            <li>Researched automating SELinux security-policy (Mandatory Access Control) generation for Linux.</li>
+            <li>TA for Advanced Programming, Automata Theory, Computer Architecture, the Microcontroller and FPGA labs, and 8086 Assembly. Ran regular Linux and open-source workshops.</li>
+            <li>Customized a soft processor on an FPGA (field-programmable gate array; Xilinx MicroBlaze).</li>
+            <li>Built the automatic entrance gates for Eram Garden (Qt for embedded Linux).</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-tags="Python,Django">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2014-07</span><span class="subject"><b>onezero-f2f</b>: Farsi to Finglish transliterator</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A Django app that converts Persian (Farsi) into Finglish: Persian written with the Latin alphabet.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/onezero-f2f" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="work" data-ref="root" data-tags="Linux,Apache,PostgreSQL,VMware">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2010-09</span><span class="subject"><b>Shiraz University</b>: System Administrator (internship)</span><span class="ref">root</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Shiraz, Iran. First internship.</p>
+          <div class="body"><ul>
+            <li>Linux administrator for the Computer Science and Engineering (CSE) department: managed the course-management and Active Directory servers, and maintained the email and Signal-Processing-Center servers (Apache, PostgreSQL, Postfix, VMware, OSSEC).</li>
+            <li>Built a web UI to create and restore virtual lab PCs from saved snapshots.</li>
+            <li>Built the landing page for the signal-processing center.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+  </ol>
+
+  <footer style="margin-top:40px; padding-top:16px; border-top:1px solid var(--border-soft); font-size:12px; color:var(--fg-faint);">
+    Amin Marashi · me@amin.codes
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  document.body.classList.add('js');
+
+  var COLS = { work:0, project:1, package:2, certification:3, education:4 };
+  var COLOR = { 0:'#9aa1ad', 1:'#6fae8e', 2:'#c2a15e', 3:'#6f93c4', 4:'#a98ec0' };
+  var CAT_ORDER = ['work','project','package','certification','education'];
+  var CAT_LABEL = { all:'all', work:'work experience', project:'project', 'package':'package', certification:'certification', education:'education' };
+
+  var COLW = 26, PADX = 6, HALF = 13, DOTY = 16, DOTR = 4;
+  function cx(c){ return PADX + c*COLW + HALF; }
+  var CX0 = cx(0);
+  var gutterW = PADX + 5*COLW + 8;
+
+  var log = document.getElementById('log');
+  var allRows = [].slice.call(log.querySelectorAll('li.row'));
+
+  /* ---------- per-entry tags chips inside detail ---------- */
+  allRows.forEach(function(li){
+    var tags = (li.dataset.tags||'').split(',').filter(Boolean);
+    if(!tags.length) return;
+    var tl = li.querySelector('.tags');
+    if(!tl){ tl = document.createElement('ul'); tl.className='tags';
+      var body = li.querySelector('.detail .body'); body.parentNode.insertBefore(tl, body.nextSibling); }
+    tags.forEach(function(t){
+      var b = document.createElement('button'); b.type='button'; b.className='tag'; b.dataset.tag=t; b.setAttribute('aria-pressed','false'); b.textContent=t;
+      b.addEventListener('click', function(e){ e.stopPropagation(); selectTagFromGraph(t); });
+      tl.appendChild(b);
+    });
+  });
+
+  /* ---------- collapse details by default (keep top two open) ---------- */
+  allRows.forEach(function(li, i){
+    var head = li.querySelector('.head');
+    var detail = li.querySelector('.detail');
+    var open = (i < 2);
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    detail.style.display = open ? '' : 'none';
+    head.addEventListener('click', function(){
+      var now = head.getAttribute('aria-expanded') === 'true';
+      head.setAttribute('aria-expanded', now ? 'false' : 'true');
+      detail.style.display = now ? 'none' : '';
+    });
+  });
+
+  /* ---------- clusters ---------- */
+  var clusters = {};
+  allRows.forEach(function(li){
+    var c = li.dataset.cluster; if(!c) return;
+    (clusters[c] = clusters[c] || []).push(li);
+  });
+  var markers = {};
+  Object.keys(clusters).forEach(function(key){
+    var members = clusters[key];
+    var cat = members[0].dataset.cat;
+    var mk = document.createElement('li');
+    mk.className = 'row marker-row';
+    mk.dataset.cat = cat;
+    mk.dataset.marker = key;
+    mk.innerHTML = '<div class="gutter"></div><div class="node">'
+      + '<button class="head marker" type="button" aria-expanded="false">'
+      + '<span class="date"></span>'
+      + '<span class="subject">' + members.length + ' more on ' + CAT_LABEL[cat] + '</span>'
+      + '<span class="chev">›</span></button></div>';
+    members[0].parentNode.insertBefore(mk, members[0]);
+    members.forEach(function(li){ li.style.display='none'; });
+    mk.querySelector('.marker').addEventListener('click', function(){
+      var open = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', open ? 'false':'true');
+      mk.style.display = open ? '' : 'none';
+      members.forEach(function(li){ li.style.display = open ? 'none' : ''; });
+      applyFilter();
+    });
+    markers[key] = { el:mk, members:members, cat:cat };
+  });
+
+  /* ---------- graph rendering ---------- */
+  function visibleRows(){
+    return [].slice.call(log.children).filter(function(li){
+      return li.style.display !== 'none';
+    });
+  }
+  function line(x1,y1,x2,y2,col){
+    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
+  }
+  function path(d,col){
+    return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
+  }
+  function dot(x,col,isMarker){
+    if(isMarker){
+      return '<circle cx="'+x+'" cy="'+(DOTY-5)+'" r="1.7" fill="'+col+'"/>'
+           + '<circle cx="'+x+'" cy="'+DOTY+'" r="1.7" fill="'+col+'"/>'
+           + '<circle cx="'+x+'" cy="'+(DOTY+5)+'" r="1.7" fill="'+col+'"/>';
+    }
+    return '<circle class="ndot" cx="'+x+'" cy="'+DOTY+'" r="'+DOTR+'" fill="'+col+'" stroke="#16181d" stroke-width="1.5"/>';
+  }
+
+  var laneFocus = {0:true,1:true,2:true,3:true,4:true};
+  var DIM = '#2d3038';
+
+  function layout(){
+    var rows = visibleRows();
+    var first = {}, last = {};
+    rows.forEach(function(li,i){
+      var c = COLS[li.dataset.cat];
+      if(first[c] === undefined) first[c] = i;
+      last[c] = i;
+    });
+    var lastIdx = rows.length - 1;
+    rows.forEach(function(li,i){
+      var own = COLS[li.dataset.cat];
+      var isMarker = li.classList.contains('marker-row');
+      var svg = '';
+      for(var c=0;c<5;c++){
+        if(first[c] === undefined) continue;
+        var f = first[c], l = last[c];
+        if(i < f || i > l) continue;
+        var x = cx(c), isOwn = (own === c);
+        var lit = laneFocus[c];
+        var col = lit ? COLOR[c] : DIM;
+        /* top region 0..DOTY */
+        if(i === f && c !== 0){
+          svg += path('M '+CX0+' 0 C '+CX0+' 11, '+x+' 5, '+x+' '+DOTY, col);
+        } else if(!(c === 0 && i === 0)) {
+          svg += line(x,0,x,DOTY,col);
+        } else {
+          svg += line(x,0,x,DOTY,col); /* main HEAD stub */
+        }
+        /* bottom region DOTY..100% */
+        if(i === l && c !== 0){
+          svg += path('M '+x+' '+DOTY+' C '+x+' 27, '+CX0+' 21, '+CX0+' 32', col);
+        } else if(c === 0 && i === lastIdx){
+          /* root: no tail below */
+        } else {
+          svg += line(x,DOTY,x,'100%',col);
+        }
+        if(isOwn) svg += dot(x, isMarker ? col : COLOR[c], isMarker);
+      }
+      var g = li.querySelector('.gutter');
+      g.innerHTML = '<svg width="'+gutterW+'" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'+svg+'</svg>';
+    });
+  }
+
+  /* ---------- filtering (emphasis only) ---------- */
+  var state = { cat:'all', tags:new Set() };
+
+  function entryTags(li){ return (li.dataset.tags||'').split(',').filter(Boolean); }
+  function entryMatch(li){
+    if(state.cat !== 'all' && li.dataset.cat !== state.cat) return false;
+    if(state.tags.size){
+      var t = entryTags(li);
+      var hit = false; state.tags.forEach(function(tag){ if(t.indexOf(tag)>=0) hit = true; });
+      if(!hit) return false;
+    }
+    return true;
+  }
+  function filterActive(){ return state.cat !== 'all' || state.tags.size > 0; }
+
+  function applyFilter(){
+    var active = filterActive();
+    var focus = 0;
+    var lf = {0:false,1:false,2:false,3:false,4:false};
+    allRows.forEach(function(li){
+      var m = entryMatch(li);
+      if(m){ focus++; lf[COLS[li.dataset.cat]] = true; }
+      var dim = active && !m;
+      li.classList.toggle('dim', dim);
+    });
+    laneFocus = active ? lf : {0:true,1:true,2:true,3:true,4:true};
+    /* markers: highlight if a hidden member matches */
+    Object.keys(markers).forEach(function(key){
+      var mk = markers[key];
+      if(mk.el.style.display === 'none'){ mk.el.classList.remove('dim','has-match'); return; }
+      var hits = mk.members.filter(entryMatch).length;
+      var sub = mk.el.querySelector('.subject');
+      if(active){
+        mk.el.classList.toggle('dim', hits === 0);
+        mk.el.classList.toggle('has-match', hits > 0);
+        sub.textContent = (hits>0 ? hits+' match · ' : '') + mk.members.length + ' more on ' + CAT_LABEL[mk.cat];
+      } else {
+        mk.el.classList.remove('dim','has-match');
+        sub.textContent = mk.members.length + ' more on ' + CAT_LABEL[mk.cat];
+      }
+    });
+    var total = allRows.length;
+    var cnt = document.getElementById('count');
+    cnt.textContent = active ? (focus + ' of ' + total + ' commits in focus') : (total + ' commits');
+    /* sync control pressed states */
+    [].forEach.call(document.querySelectorAll('#catseg button'), function(b){
+      b.setAttribute('aria-pressed', b.dataset.cat === state.cat ? 'true':'false');
+    });
+    [].forEach.call(document.querySelectorAll('#tagseg .chip[data-tag]'), function(b){
+      b.setAttribute('aria-pressed', state.tags.has(b.dataset.tag) ? 'true':'false');
+    });
+    [].forEach.call(document.querySelectorAll('.tag[data-tag]'), function(b){
+      b.setAttribute('aria-pressed', state.tags.has(b.dataset.tag) ? 'true':'false');
+    });
+    collapseEmptyCats();
+    layout();
+  }
+
+  function toggleTag(tag){
+    if(state.tags.has(tag)) state.tags.delete(tag); else state.tags.add(tag);
+    applyFilter();
+  }
+
+  /* category-panel state, shared so clicking a tag in the graph can expand its category */
+  var catOpen = {}, catPillEl = {}, catPanelEl = {}, catTagList = {}, tagToCat = {};
+  function setCatOpen(key, open){
+    if(!catPillEl[key]) return;
+    catOpen[key] = open;
+    catPillEl[key].setAttribute('aria-pressed', open ? 'true' : 'false');
+    catPanelEl[key].style.display = open ? '' : 'none';
+  }
+  function selectTagFromGraph(t){
+    var cat = tagToCat[t];
+    if(cat && !catOpen[cat]) setCatOpen(cat, true);   /* expand its category if collapsed */
+    if(state.tags.has(t)) state.tags.delete(t); else state.tags.add(t);
+    applyFilter();
+  }
+  /* collapse any open category once none of its tags are selected */
+  function collapseEmptyCats(){
+    Object.keys(catOpen).forEach(function(key){
+      if(catOpen[key] && !catTagList[key].some(function(t){ return state.tags.has(t); })) setCatOpen(key, false);
+    });
+  }
+
+  /* ---------- build controls ---------- */
+  function buildControls(){
+    var catseg = document.getElementById('catseg');
+    ['all'].concat(CAT_ORDER).forEach(function(cat){
+      var b = document.createElement('button'); b.type='button'; b.dataset.cat = cat;
+      b.setAttribute('aria-pressed', cat==='all'?'true':'false');
+      if(cat==='all'){ b.textContent = CAT_LABEL[cat]; }
+      else { b.innerHTML = '<i class="sw" style="background:'+COLOR[COLS[cat]]+'"></i>' + CAT_LABEL[cat]; }
+      b.addEventListener('click', function(){ state.cat = cat; applyFilter(); });
+      catseg.appendChild(b);
+    });
+    /* tag counts */
+    var counts = {};
+    allRows.forEach(function(li){ entryTags(li).forEach(function(t){ counts[t]=(counts[t]||0)+1; }); });
+
+    /* group the tags under tech categories (display only; tags themselves unchanged) */
+    var TECH_GROUPS = [
+      ['languages',          ['JavaScript','TypeScript','Python','Perl','Rust','C++','Swift','Bash']],
+      ['web & frontend',     ['React','AngularJS','Redux','RxJS','D3.js','Chart.js','Ionic','Kivy','Babel','Webpack','Blockly','WebSocket']],
+      ['backend & APIs',     ['Node.js','Django','Flask','Mojolicious','Swagger']],
+      ['cloud & devops',     ['AWS','GCP','Lambda','Serverless','CDK','Terraform','Docker','Chef']],
+      ['data',               ['PostgreSQL','DynamoDB','Redis','BigQuery','Airflow']],
+      ['systems & hardware', ['Linux','FreeBSD','SELinux','Apache','VMware','FPGA','Verilog','Qt']],
+      ['ai',                 ['LLMs','ML']]
+    ];
+    var grouped = {};
+    TECH_GROUPS.forEach(function(g){ g[1].forEach(function(t){ grouped[t]=true; }); });
+    var leftover = Object.keys(counts).filter(function(t){ return !grouped[t]; }).sort();
+    if(leftover.length) TECH_GROUPS.push(['other', leftover]);
+
+    var tagseg = document.getElementById('tagseg');
+    var pillRow = document.createElement('div'); pillRow.className = 'seg catpills';
+    var panelWrap = document.createElement('div'); panelWrap.className = 'catpanels';
+    tagseg.appendChild(pillRow); tagseg.appendChild(panelWrap);
+
+    /* map every tag to its category so graph clicks can expand the right one */
+    TECH_GROUPS.forEach(function(g){ g[1].forEach(function(t){ tagToCat[t] = g[0]; }); });
+
+    function makeChip(t){
+      var b = document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.tag=t;
+      b.setAttribute('aria-pressed','false');
+      b.innerHTML = t + '<span class="n">'+counts[t]+'</span>';
+      b.addEventListener('click', function(){ toggleTag(t); });
+      return b;
+    }
+    function toggleCat(key){
+      var open = !catOpen[key];
+      setCatOpen(key, open);
+      catTagList[key].forEach(function(t){ if(open) state.tags.add(t); else state.tags.delete(t); });
+      applyFilter();
+    }
+    TECH_GROUPS.forEach(function(g){
+      var key = g[0];
+      var present = g[1].filter(function(t){ return counts[t]; })
+                        .sort(function(a,b){ return counts[b]-counts[a] || a.localeCompare(b); });
+      if(!present.length) return;
+      catTagList[key] = present; catOpen[key] = false;
+      var pill = document.createElement('button'); pill.type='button'; pill.className='chip catpill';
+      pill.setAttribute('aria-pressed','false');
+      pill.innerHTML = key + '<span class="n">'+present.length+'</span>';
+      pillRow.appendChild(pill); catPillEl[key] = pill;
+      var panel = document.createElement('div'); panel.className='seg catpanel'; panel.style.display='none';
+      present.forEach(function(t){ panel.appendChild(makeChip(t)); });
+      panelWrap.appendChild(panel); catPanelEl[key] = panel;
+      pill.addEventListener('click', function(){ toggleCat(key); });
+    });
+    document.getElementById('reset').addEventListener('click', function(){
+      state.cat='all'; state.tags.clear();
+      Object.keys(catOpen).forEach(function(k){ setCatOpen(k, false); });
+      applyFilter();
+    });
+    var c = document.getElementById('controls'); c.hidden = false;
+  }
+
+  buildControls();
+  layout();
+  applyFilter();
+  window.addEventListener('resize', function(){ /* rails use % height; no recompute needed */ });
+})();
+</script>
+</body>
+</html>
