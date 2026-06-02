@@ -133,7 +133,7 @@
 
   @media (max-width:620px){
     .wrap{ padding:28px 16px 80px; }
-    :root{ --gutterW:120px; }
+    :root{ --gutterW:84px; }
     .head{ flex-wrap:wrap; gap:2px 10px; }
     .head .date{ min-width:0; flex-basis:100%; }
     .ctl-label{ flex-basis:100%; }
@@ -196,42 +196,18 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="Rust,Serverless,LLMs">
+    <li class="row" data-cat="project" data-tags="LLMs">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2026-03</span><span class="subject"><b>Rust serverless platform</b>: personal product</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>ai-tools</b>: command-line helpers for AI agents</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>A personal product with backends written entirely in Rust: a game-creation engine on a serverless runtime built around security and scalability. Uses Anthropic and OpenAI models under the hood.</p></div>
-        </div>
-      </div>
-    </li>
-
-    <li class="row" data-cat="package" data-tags="JavaScript,Node.js">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2022-08</span><span class="subject"><b>js-interpreter</b>: maintained npm package</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>Maintain Neil Fraser's JS-Interpreter as an npm package, with an added command-line tool. About 5,600 downloads a week.</p></div>
-          <ul class="tags"></ul>
-          <div class="links">
-            <a class="pill" href="https://www.npmjs.com/package/js-interpreter" target="_blank" rel="noopener">npm</a>
-            <a class="pill" href="https://github.com/aminmarashi/JS-Interpreter" target="_blank" rel="noopener">repo</a>
-          </div>
+          <div class="body"><p>Small command-line tools for AI coding-agent workflows. The main one is <b class="sh">cerebro</b>, a Claude-based orchestrator that runs several coding agents at once, keeps their history, and prepares reviewed, ready-to-merge code changes.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/ai-tools" target="_blank" rel="noopener">repo</a></div>
         </div>
       </div>
     </li>
 
     <li class="row" data-cat="project" data-tags="LLMs">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>cerebro</b>: Claude agent orchestrator</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>A Claude-based orchestrator that coordinates multiple coding agents, keeps their history, and prepares reviewed, ready-to-merge code changes.</p></div>
-        </div>
-      </div>
-    </li>
-
-    <li class="row" data-cat="project" data-cluster="c1" data-tags="LLMs">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>codex-proxy</b>: Claude Code to Codex bridge</span><span class="chev">›</span></button>
@@ -242,13 +218,12 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-cluster="c1" data-tags="LLMs">
+    <li class="row" data-cat="project" data-tags="Rust,Serverless,LLMs">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2026-05</span><span class="subject"><b>ai-tools</b>: command-line helpers for AI agents</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2026-03</span><span class="subject"><b>Rust serverless platform</b>: personal product</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>Small command-line utilities that smooth out AI coding-agent workflows.</p></div>
-          <div class="links"><a class="pill" href="https://github.com/aminmarashi/ai-tools" target="_blank" rel="noopener">repo</a></div>
+          <div class="body"><p>A personal product with backends written entirely in Rust: a game-creation engine on a serverless runtime built around security and scalability. Uses Anthropic and OpenAI models under the hood.</p></div>
         </div>
       </div>
     </li>
@@ -286,23 +261,23 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="ML,Swift">
+    <li class="row" data-cat="project" data-tags="ML,Swift,MongoDB,Vercel,Pulumi">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2023-11</span><span class="subject"><b>lit-feed</b>: ML-personalized article reader</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>An article feed reader that uses machine learning to filter and rank articles to each reader's preferences. iOS app in Swift.</p></div>
+          <div class="body"><p>An article feed reader that uses machine learning to filter and rank articles to each reader's preferences. iOS app in Swift. Backend workers run asynchronously on MongoDB Atlas; backend and web frontend are hosted on Vercel; infrastructure is managed with Pulumi.</p></div>
           <div class="links"><a class="pill" href="https://github.com/aminmarashi/lit-feed-ios" target="_blank" rel="noopener">repo</a></div>
         </div>
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="JavaScript,LLMs">
+    <li class="row" data-cat="project" data-tags="JavaScript,LLMs,MongoDB,Vercel">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>chat.lit.codes</b>: GPT chat web app</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>A GPT chat web app with end-to-end-encrypted history, plus a command that lets the model read the current web page.</p></div>
+          <div class="body"><p>A GPT chat web app with end-to-end-encrypted history, plus a command that lets the model read the current web page. Backed by MongoDB and deployed on Vercel.</p></div>
           <div class="links"><a class="pill" href="https://chat.lit.codes" target="_blank" rel="noopener">live</a></div>
         </div>
       </div>
@@ -313,23 +288,22 @@
       <div class="node">
         <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>Chat with OpenAI API</b>: Chrome extension</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>Summarize or ask questions about the current web page using an OpenAI API key.</p></div>
-          <div class="links"><a class="pill" href="https://chromewebstore.google.com/detail/chat-with-openai-api/bdaanmhmamgpeppfdajedeliilghopol" target="_blank" rel="noopener">store</a></div>
+          <div class="body"><p>A Chrome extension that summarizes or answers questions about the current web page using your own OpenAI API key. It gave the model access to live web pages before ChatGPT added browsing, and reached over 1,000 users. Chat history was end-to-end encrypted, with a strong emphasis on privacy and security.</p></div>
         </div>
       </div>
     </li>
 
-    <li class="row" data-cat="work" data-tags="TypeScript,AWS,CDK">
+    <li class="row" data-cat="package" data-tags="JavaScript,Node.js">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2021-06</span><span class="subject"><b>Fashion Cloud</b>: Senior Software Engineer</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2022-08</span><span class="subject"><b>js-interpreter</b>: maintained npm package</span><span class="chev">›</span></button>
         <div class="detail">
-          <p class="meta">Amsterdam, NL.</p>
-          <div class="body"><ul>
-            <li>Built and scaled an internal data pipeline, splitting stages into their own container deployments (AWS ECS).</li>
-            <li>Orchestrated it with AWS Step Functions and infrastructure-as-code (CDK); joined the on-call rotation.</li>
-            <li>Researched UI alternatives for the data-transformation tooling.</li>
-          </ul></div>
+          <div class="body"><p>Maintain Neil Fraser's JS-Interpreter as an npm package, with an added command-line tool. About 5,600 downloads a week.</p></div>
+          <ul class="tags"></ul>
+          <div class="links">
+            <a class="pill" href="https://www.npmjs.com/package/js-interpreter" target="_blank" rel="noopener">npm</a>
+            <a class="pill" href="https://github.com/aminmarashi/JS-Interpreter" target="_blank" rel="noopener">repo</a>
+          </div>
         </div>
       </div>
     </li>
@@ -341,6 +315,32 @@
         <div class="detail">
           <div class="body"><p>Issued Feb 2022.</p></div>
           <div class="links"><a class="pill" href="https://www.linkedin.com/in/amin-codes/details/certifications/" target="_blank" rel="noopener">cert</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="work" data-tags="TypeScript,AWS,CDK,MongoDB">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2021-06</span><span class="subject"><b>Fashion Cloud</b>: Senior Software Engineer</span><span class="chev">›</span></button>
+        <div class="detail">
+          <p class="meta">Amsterdam, NL.</p>
+          <div class="body"><ul>
+            <li>Built and scaled an internal data pipeline on MongoDB, splitting stages into their own container deployments (AWS ECS).</li>
+            <li>Orchestrated it with AWS Step Functions and infrastructure-as-code (CDK); joined the on-call rotation.</li>
+            <li>Used MongoDB as the primary data store across services.</li>
+            <li>Researched UI alternatives for the data-transformation tooling.</li>
+          </ul></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="education" data-tags="AWS,Docker">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2020-05</span><span class="subject"><b>Udacity</b>: Cloud DevOps Engineer Nanodegree</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Cloud DevOps Engineer Nanodegree.</p></div>
         </div>
       </div>
     </li>
@@ -360,12 +360,35 @@
       </div>
     </li>
 
-    <li class="row" data-cat="education" data-tags="AWS,Docker">
+    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2020-05</span><span class="subject"><b>Udacity</b>: Cloud DevOps Engineer Nanodegree</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>pomodoro</b>: cross-device timer</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>Cloud DevOps Engineer Nanodegree.</p></div>
+          <div class="body"><p>A Pomodoro timer that syncs across your devices.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/pomodoro" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>seen</b>: email open-receipt service</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>Email open-tracking and read-receipt service.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/seen" target="_blank" rel="noopener">repo</a></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c3" data-tags="Bash">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2018-03</span><span class="subject"><b>avail-test</b>: availability-test runner</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A platform-agnostic tool to run and monitor availability tests (Bash).</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/avail-test" target="_blank" rel="noopener">repo</a></div>
         </div>
       </div>
     </li>
@@ -413,39 +436,6 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>pomodoro</b>: cross-device timer</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>A Pomodoro timer that syncs across your devices.</p></div>
-          <div class="links"><a class="pill" href="https://github.com/aminmarashi/pomodoro" target="_blank" rel="noopener">repo</a></div>
-        </div>
-      </div>
-    </li>
-
-    <li class="row" data-cat="project" data-cluster="c3" data-tags="JavaScript">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2019-08</span><span class="subject"><b>seen</b>: email open-receipt service</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>Email open-tracking and read-receipt service.</p></div>
-          <div class="links"><a class="pill" href="https://github.com/aminmarashi/seen" target="_blank" rel="noopener">repo</a></div>
-        </div>
-      </div>
-    </li>
-
-    <li class="row" data-cat="project" data-cluster="c4" data-tags="Bash">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2018-03</span><span class="subject"><b>avail-test</b>: availability-test runner</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>A platform-agnostic tool to run and monitor availability tests (Bash).</p></div>
-          <div class="links"><a class="pill" href="https://github.com/aminmarashi/avail-test" target="_blank" rel="noopener">repo</a></div>
-        </div>
-      </div>
-    </li>
-
     <li class="row" data-cat="project" data-cluster="c4" data-tags="AngularJS,Chart.js,Ionic,JavaScript">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
@@ -462,6 +452,17 @@
         <button class="head" type="button"><span class="date">2015-06</span><span class="subject"><b>REST API in Python</b>: Flask + Swagger</span><span class="chev">›</span></button>
         <div class="detail">
           <div class="body"><p>RESTful API design, testing, and documentation in Python (Flask, Swagger, AWS Lambda).</p></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="row" data-cat="project" data-cluster="c4" data-tags="Python,Django">
+      <div class="gutter"><span class="fallback-rail"></span></div>
+      <div class="node">
+        <button class="head" type="button"><span class="date">2014-07</span><span class="subject"><b>onezero-f2f</b>: Farsi to Finglish transliterator</span><span class="chev">›</span></button>
+        <div class="detail">
+          <div class="body"><p>A Django app that converts Persian (Farsi) into Finglish: Persian written with the Latin alphabet.</p></div>
+          <div class="links"><a class="pill" href="https://github.com/aminmarashi/onezero-f2f" target="_blank" rel="noopener">repo</a></div>
         </div>
       </div>
     </li>
@@ -489,9 +490,10 @@
     <li class="row" data-cat="project" data-cluster="c4" data-tags="FreeBSD">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2014-01</span><span class="subject"><b>IPv6 headers in FreeBSD</b>: IETF draft</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2014-01</span><span class="subject"><b>IPv6 headers in FreeBSD</b>: IETF / RFC 8200</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>Authored an IETF (internet-standards body) draft for IPv6 headers in the FreeBSD kernel.</p></div>
+          <div class="body"><p>Implemented IPv6 header handling in the FreeBSD kernel, contributing to the IETF (internet-standards body) work that became RFC 8200.</p></div>
+          <div class="links"><a class="pill" href="https://datatracker.ietf.org/doc/html/rfc8200" target="_blank" rel="noopener">rfc</a></div>
         </div>
       </div>
     </li>
@@ -531,17 +533,6 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="Python,Django">
-      <div class="gutter"><span class="fallback-rail"></span></div>
-      <div class="node">
-        <button class="head" type="button"><span class="date">2014-07</span><span class="subject"><b>onezero-f2f</b>: Farsi to Finglish transliterator</span><span class="chev">›</span></button>
-        <div class="detail">
-          <div class="body"><p>A Django app that converts Persian (Farsi) into Finglish: Persian written with the Latin alphabet.</p></div>
-          <div class="links"><a class="pill" href="https://github.com/aminmarashi/onezero-f2f" target="_blank" rel="noopener">repo</a></div>
-        </div>
-      </div>
-    </li>
-
     <li class="row" data-cat="work" data-ref="root" data-tags="Linux,Apache,PostgreSQL,VMware">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
@@ -574,10 +565,18 @@
   var CAT_ORDER = ['work','project','package','certification','education'];
   var CAT_LABEL = { all:'all', work:'work experience', project:'project', 'package':'package', certification:'certification', education:'education' };
 
-  var COLW = 26, PADX = 6, HALF = 13, DOTY = 16, DOTR = 4;
+  var PADX = 6, DOTY = 16, DOTR = 4;
+  var COLW, HALF, CX0, gutterW;
+  function computeMetrics(){
+    /* narrow lanes on phones so the graph stops crowding out the text */
+    COLW = window.innerWidth <= 620 ? 14 : 26;
+    HALF = COLW / 2;
+    CX0 = PADX + HALF;
+    gutterW = PADX + 5 * COLW + 8;
+    document.documentElement.style.setProperty('--gutterW', gutterW + 'px');
+  }
   function cx(c){ return PADX + c*COLW + HALF; }
-  var CX0 = cx(0);
-  var gutterW = PADX + 5*COLW + 8;
+  computeMetrics();
 
   var log = document.getElementById('log');
   var allRows = [].slice.call(log.querySelectorAll('li.row'));
@@ -812,8 +811,8 @@
       ['languages',          ['JavaScript','TypeScript','Python','Perl','Rust','C++','Swift','Bash']],
       ['web & frontend',     ['React','AngularJS','Redux','RxJS','D3.js','Chart.js','Ionic','Kivy','Babel','Webpack','Blockly','WebSocket']],
       ['backend & APIs',     ['Node.js','Django','Flask','Mojolicious','Swagger']],
-      ['cloud & devops',     ['AWS','GCP','Lambda','Serverless','CDK','Terraform','Docker','Chef']],
-      ['data',               ['PostgreSQL','DynamoDB','Redis','BigQuery','Airflow']],
+      ['cloud & devops',     ['AWS','GCP','Lambda','Serverless','CDK','Terraform','Pulumi','Docker','Chef','Vercel']],
+      ['data',               ['PostgreSQL','MongoDB','DynamoDB','Redis','BigQuery','Airflow']],
       ['systems & hardware', ['Linux','FreeBSD','SELinux','Apache','VMware','FPGA','Verilog','Qt']],
       ['ai',                 ['LLMs','ML']]
     ];
@@ -869,7 +868,7 @@
   buildControls();
   layout();
   applyFilter();
-  window.addEventListener('resize', function(){ /* rails use % height; no recompute needed */ });
+  window.addEventListener('resize', function(){ computeMetrics(); layout(); });
 })();
 </script>
 </body>
