@@ -247,8 +247,9 @@
         <div class="detail">
           <p class="meta">Amsterdam, NL. Risk-management domain.</p>
           <div class="body"><ul>
-            <li>Replaced the external KVK (Dutch Chamber of Commerce) company-information API with an in-house ABN AMRO equivalent, <b>cutting company-data lookup costs by more than half (&euro;100K a year)</b>.</li>
-            <li>Added <b>beta publishing to the internal-package CI/CD pipeline</b> and a <b>company-wide log-anonymization process</b>.</li>
+            <li><b>Led the deprecation of a bulky core service</b>: split it into two smaller, purpose-built services I designed, owning the design, the cross-team rollout, and the engineers. One replaced the direct KVK (Dutch Chamber of Commerce) connection with an in-house ABN AMRO source, <b>cutting company-data lookup costs by more than half (&euro;100K a year)</b>.</li>
+            <li>Designed a new forbearance offer-type flow in the risk domain and settled its scope across product and engineering; introduced integration tests to that service.</li>
+            <li>Drove two company-wide changes: <b>beta publishing in the internal-package CI/CD pipeline</b> and a <b>log-anonymization process</b>.</li>
             <li>Drove quality: introduced integration and end-to-end testing, test-first TDD, and an &gt;80% coverage gate (Cypress, GitLab CI).</li>
             <li><b>Hosted and presented the company-wide Service Engineering Meetings</b>, ran technical interviews, and initiated tech-week items focused on technical health.</li>
             <li>Built serverless backends on AWS (Lambda, API Gateway, SNS, CloudFormation) with Terraform, and strengthened API request/response validation. Made services runnable and testable locally, and cut build times.</li>
@@ -387,9 +388,9 @@
           <p class="meta">Amsterdam, NL.</p>
           <div class="body"><ul>
             <li>Built and scaled an internal data ETL tool that processed and merged data in PostgreSQL, then loaded the merged result into MongoDB at the final stage.</li>
-            <li>Fixed scalability by splitting pipeline stages into their own container deployments (AWS ECS).</li>
+            <li>Led the re-architecture that fixed scalability by splitting pipeline stages into their own container deployments (AWS ECS), and owned its rollout.</li>
             <li>Orchestrated it with AWS Step Functions and infrastructure-as-code (CDK); joined the on-call rotation.</li>
-            <li>Researched UI alternatives for the data-transformation tooling.</li>
+            <li>Evaluated UI alternatives for the data-transformation tooling.</li>
           </ul></div>
         </div>
       </div>
@@ -413,7 +414,7 @@
           <p class="meta">Cyberjaya, Malaysia.</p>
           <div class="body"><ul>
             <li>Built a release manager (on Chef + Slack) that <b>coordinated company-wide releases across hundreds of servers (AWS EC2)</b>. Led a team of senior PostgreSQL engineers, and ran an in-house git server synced between GitLab and GitHub.</li>
-            <li>Migrated the business-intelligence (BI) stack, including a 2 TB reporting database, from company servers to Google Cloud (GCP) with minutes of downtime. Docker Swarm; Metabase + Airflow + BigQuery; cut cloud costs by thousands a month. Tested point-in-time-recovery (PITR) backups and hardened the databases.</li>
+            <li>Led the migration of the business-intelligence (BI) stack, including a 2 TB reporting database, from company servers to Google Cloud (GCP) with minutes of downtime, owning the architecture and cutover. Docker Swarm; Metabase + Airflow + BigQuery; cut cloud costs by thousands a month. Tested point-in-time-recovery (PITR) backups and hardened the databases.</li>
             <li>Built integration and automation across Trello, GitHub, and Redmine to streamline tagging and releases. Round-the-clock on-call.</li>
           </ul></div>
         </div>
