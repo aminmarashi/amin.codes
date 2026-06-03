@@ -218,12 +218,12 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="Rust,Serverless,LLMs">
+    <li class="row" data-cat="project" data-tags="Rust,Serverless,Distributed,AWS,Lambda,DynamoDB,LLMs">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2026-03</span><span class="subject"><b>Rust serverless platform</b>: personal product</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>A personal product with backends written entirely in Rust: a game-creation engine on a serverless runtime built around security and scalability. Uses Anthropic and OpenAI models under the hood.</p></div>
+          <div class="body"><p>A personal product with backends written entirely in Rust: a game-creation engine on a serverless runtime built around security and scalability. Distributed on AWS: published games run behind API Gateway with Rust Lambda backends and DynamoDB; frontends on Cloudflare Pages. Uses Anthropic and OpenAI models under the hood.</p></div>
         </div>
       </div>
     </li>
@@ -261,12 +261,12 @@
       </div>
     </li>
 
-    <li class="row" data-cat="project" data-tags="ML,Swift,MongoDB,Vercel,Pulumi">
+    <li class="row" data-cat="project" data-tags="ML,Swift,MongoDB,Vercel,Pulumi,Python,Distributed">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2023-11</span><span class="subject"><b>lit-feed</b>: ML-personalized article reader</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>An article feed reader that uses machine learning to filter and rank articles to each reader's preferences. iOS app in Swift. Backend workers run asynchronously on MongoDB Atlas; backend and web frontend are hosted on Vercel; infrastructure is managed with Pulumi.</p></div>
+          <div class="body"><p>An article feed reader that uses machine learning to filter and rank articles to each reader's preferences. A distributed system: a Vercel full-stack app fronts the backend services, MongoDB Atlas workers refresh articles and feeds asynchronously, and a Python AI engine classifies articles async. iOS app in Swift; infrastructure managed with Pulumi.</p></div>
           <div class="links"><a class="pill" href="https://github.com/aminmarashi/lit-feed-ios" target="_blank" rel="noopener">repo</a></div>
         </div>
       </div>
@@ -275,10 +275,9 @@
     <li class="row" data-cat="project" data-tags="JavaScript,LLMs,MongoDB,Vercel">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
-        <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>chat.lit.codes</b>: GPT chat web app</span><span class="chev">›</span></button>
+        <button class="head" type="button"><span class="date">2023-04</span><span class="subject"><b>GPT chat web app</b></span><span class="chev">›</span></button>
         <div class="detail">
           <div class="body"><p>A GPT chat web app with end-to-end-encrypted history, plus a command that lets the model read the current web page. Backed by MongoDB and deployed on Vercel.</p></div>
-          <div class="links"><a class="pill" href="https://chat.lit.codes" target="_blank" rel="noopener">live</a></div>
         </div>
       </div>
     </li>
@@ -393,7 +392,7 @@
       </div>
     </li>
 
-    <li class="row" data-cat="work" data-tags="JavaScript,React,WebSocket,Perl,Redis,Babel,Webpack,Mojolicious,Node.js">
+    <li class="row" data-cat="work" data-tags="JavaScript,React,WebSocket,Perl,Redis,Babel,Webpack,Mojolicious,Node.js,Distributed">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>Binary.com (later Deriv.com)</b>: Full-Stack Engineer</span><span class="chev">›</span></button>
@@ -401,6 +400,7 @@
           <p class="meta">Cyberjaya, Malaysia.</p>
           <div class="body"><ul>
             <li>Built the most successful Binary.com front-end trading app on its real-time WebSocket API. It generated millions in annual revenue.</li>
+            <li>Worked across a distributed, message-driven backend: thin WebSocket API layers delegated work to RPC workers over Redis queues, handling sub-second price ticks and trades.</li>
             <li>Modernized the JavaScript front end: moved the static site to Webpack/Babel/ES6, published the team's code-style config, and added in-context translation (i18n).</li>
             <li>Built an internal Perl framework for asynchronous integration and load testing.</li>
             <li>Conducted online code-challenge screenings for backend hiring.</li>
@@ -411,7 +411,7 @@
       </div>
     </li>
 
-    <li class="row" data-cat="package" data-tags="JavaScript,WebSocket,RxJS,Node.js">
+    <li class="row" data-cat="package" data-tags="JavaScript,WebSocket,RxJS,Node.js,Distributed">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>@deriv/deriv-api</b>: Deriv WebSocket API</span><span class="chev">›</span></button>
@@ -812,7 +812,7 @@
     var TECH_GROUPS = [
       ['languages',          ['JavaScript','TypeScript','Python','Perl','Rust','C++','Swift','Bash']],
       ['web & frontend',     ['React','AngularJS','Redux','RxJS','D3.js','Chart.js','Ionic','Kivy','Babel','Webpack','Blockly','WebSocket']],
-      ['backend & APIs',     ['Node.js','Django','Flask','Mojolicious','Swagger']],
+      ['backend & APIs',     ['Node.js','Django','Flask','Mojolicious','Swagger','Distributed']],
       ['cloud & devops',     ['AWS','GCP','Lambda','Serverless','CDK','Terraform','Pulumi','Docker','Chef','Vercel']],
       ['data',               ['PostgreSQL','MongoDB','DynamoDB','Redis','BigQuery','Airflow']],
       ['systems & hardware', ['Linux','FreeBSD','SELinux','Apache','VMware','FPGA','Verilog','Qt']],
