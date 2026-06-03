@@ -646,19 +646,19 @@
       return li.style.display !== 'none';
     });
   }
-  function line(x1,y1,x2,y2,col){
-    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
+  function line(x1,y1,x2,y2,col,c){
+    return '<line class="gstroke" data-lane="'+c+'" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
   }
-  function path(d,col){
-    return '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
+  function path(d,col,c){
+    return '<path class="gstroke" data-lane="'+c+'" d="'+d+'" fill="none" stroke="'+col+'" stroke-width="1.5" stroke-linecap="round"/>';
   }
-  function dot(x,col,isMarker){
+  function dot(x,col,isMarker,c){
     if(isMarker){
-      return '<circle cx="'+x+'" cy="'+(DOTY-5)+'" r="1.7" fill="'+col+'"/>'
-           + '<circle cx="'+x+'" cy="'+DOTY+'" r="1.7" fill="'+col+'"/>'
-           + '<circle cx="'+x+'" cy="'+(DOTY+5)+'" r="1.7" fill="'+col+'"/>';
+      return '<circle class="gdot" data-lane="'+c+'" cx="'+x+'" cy="'+(DOTY-5)+'" r="1.7" fill="'+col+'"/>'
+           + '<circle class="gdot" data-lane="'+c+'" cx="'+x+'" cy="'+DOTY+'" r="1.7" fill="'+col+'"/>'
+           + '<circle class="gdot" data-lane="'+c+'" cx="'+x+'" cy="'+(DOTY+5)+'" r="1.7" fill="'+col+'"/>';
     }
-    return '<circle class="ndot" cx="'+x+'" cy="'+DOTY+'" r="'+DOTR+'" fill="'+col+'" stroke="#16181d" stroke-width="1.5"/>';
+    return '<circle class="ndot gdot" data-lane="'+c+'" cx="'+x+'" cy="'+DOTY+'" r="'+DOTR+'" fill="'+col+'" stroke="#16181d" stroke-width="1.5"/>';
   }
 
   var laneFocus = {0:true,1:true,2:true,3:true,4:true};
@@ -676,7 +676,7 @@
     rows.forEach(function(li,i){
       var own = COLS[li.dataset.cat];
       var isMarker = li.classList.contains('marker-row');
-      var svg = '';
+      var svg = '', hits = '';
       for(var c=0;c<5;c++){
         if(first[c] === undefined) continue;
         var f = first[c], l = last[c];
@@ -686,24 +686,26 @@
         var col = lit ? COLOR[c] : DIM;
         /* top region 0..DOTY */
         if(i === f && c !== 0){
-          svg += path('M '+CX0+' 0 C '+CX0+' 11, '+x+' 5, '+x+' '+DOTY, col);
+          svg += path('M '+CX0+' 0 C '+CX0+' 11, '+x+' 5, '+x+' '+DOTY, col, c);
         } else if(!(c === 0 && i === 0)) {
-          svg += line(x,0,x,DOTY,col);
+          svg += line(x,0,x,DOTY,col, c);
         } else {
-          svg += line(x,0,x,DOTY,col); /* main HEAD stub */
+          svg += line(x,0,x,DOTY,col, c); /* main HEAD stub */
         }
         /* bottom region DOTY..100% */
         if(i === l && c !== 0){
-          svg += path('M '+x+' '+DOTY+' C '+x+' 27, '+CX0+' 21, '+CX0+' 32', col);
+          svg += path('M '+x+' '+DOTY+' C '+x+' 27, '+CX0+' 21, '+CX0+' 32', col, c);
         } else if(c === 0 && i === lastIdx){
           /* root: no tail below */
         } else {
-          svg += line(x,DOTY,x,'100%',col);
+          svg += line(x,DOTY,x,'100%',col, c);
         }
-        if(isOwn) svg += dot(x, isMarker ? col : COLOR[c], isMarker);
+        if(isOwn) svg += dot(x, isMarker ? col : COLOR[c], isMarker, c);
+        /* transparent hit area so the whole lane is clickable / hoverable */
+        hits += '<rect class="lanehit" data-lane="'+c+'" x="'+(x-HALF)+'" y="0" width="'+COLW+'" height="100%" fill="transparent"/>';
       }
       var g = li.querySelector('.gutter');
-      g.innerHTML = '<svg width="'+gutterW+'" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'+svg+'</svg>';
+      g.innerHTML = '<svg width="'+gutterW+'" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">'+svg+hits+'</svg>';
     });
   }
 
@@ -864,6 +866,41 @@
     });
     var c = document.getElementById('controls'); c.hidden = false;
   }
+
+  /* ---------- lane click + hover ---------- */
+  /* hovering a lane lights it and dims the rest (visual only, via a class on #log);
+     clicking selects that lane's category, clicking the same lane again clears it */
+  (function setupLaneInteraction(){
+    var css = '';
+    for(var c=0;c<5;c++){
+      css += '#log[data-hover="'+c+'"] .gstroke:not([data-lane="'+c+'"]){stroke:'+DIM+' !important;}'
+           + '#log[data-hover="'+c+'"] .gdot:not([data-lane="'+c+'"]){fill:'+DIM+' !important;}'
+           + '#log[data-hover="'+c+'"] .gstroke[data-lane="'+c+'"]{stroke:'+COLOR[c]+' !important;}'
+           + '#log[data-hover="'+c+'"] .gdot[data-lane="'+c+'"]{fill:'+COLOR[c]+' !important;}';
+    }
+    var st = document.createElement('style');
+    st.textContent = '.lanehit{cursor:pointer;}' + css;
+    document.head.appendChild(st);
+
+    function laneOf(e){
+      var t = e.target;
+      return (t && t.classList && t.classList.contains('lanehit')) ? t.getAttribute('data-lane') : null;
+    }
+    log.addEventListener('mouseover', function(e){
+      var lane = laneOf(e);
+      if(lane === null){ if('hover' in log.dataset) delete log.dataset.hover; }
+      else if(log.dataset.hover !== lane){ log.dataset.hover = lane; }
+    });
+    log.addEventListener('mouseleave', function(){ delete log.dataset.hover; });
+    log.addEventListener('click', function(e){
+      var lane = laneOf(e);
+      if(lane === null) return;
+      var cat = CAT_ORDER[+lane];
+      state.cat = (state.cat === cat) ? 'all' : cat;
+      delete log.dataset.hover;
+      applyFilter();
+    });
+  })();
 
   buildControls();
   layout();
