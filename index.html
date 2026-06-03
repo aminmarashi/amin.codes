@@ -185,11 +185,10 @@
         <div class="detail">
           <p class="meta">Amsterdam, NL. Risk-management domain.</p>
           <div class="body"><ul>
-            <li>Replaced legacy systems with simpler, faster, more cost-efficient ones, improving two key company metrics.</li>
-            <li>Owned security: cleared the team's vulnerability backlog and set up recurring triage and alerting (Sentry, Datadog, PagerDuty).</li>
+            <li>Replaced the external KVK (Dutch Chamber of Commerce) company-information API with an in-house ABN AMRO equivalent, <b>cutting company-data lookup costs by more than half (&euro;100K a year)</b>.</li>
+            <li>Added <b>beta publishing to the internal-package CI/CD pipeline</b> and a <b>company-wide log-anonymization process</b>.</li>
             <li>Drove quality: introduced integration and end-to-end testing, test-first TDD, and an &gt;80% coverage gate (Cypress, GitLab CI).</li>
-            <li>Initiated tech-week items focused on the team's technical health.</li>
-            <li>Shared knowledge through company-wide engineering talks, and ran technical interviews.</li>
+            <li><b>Hosted and presented the company-wide Service Engineering Meetings</b>, ran technical interviews, and initiated tech-week items focused on technical health.</li>
             <li>Built serverless backends on AWS (Lambda, API Gateway, SNS, CloudFormation) with Terraform, and strengthened API request/response validation. Made services runnable and testable locally, and cut build times.</li>
           </ul></div>
         </div>
@@ -318,16 +317,16 @@
       </div>
     </li>
 
-    <li class="row" data-cat="work" data-tags="TypeScript,AWS,CDK,MongoDB">
+    <li class="row" data-cat="work" data-tags="TypeScript,AWS,CDK,PostgreSQL,MongoDB">
       <div class="gutter"><span class="fallback-rail"></span></div>
       <div class="node">
         <button class="head" type="button"><span class="date">2021-06</span><span class="subject"><b>Fashion Cloud</b>: Senior Software Engineer</span><span class="chev">›</span></button>
         <div class="detail">
           <p class="meta">Amsterdam, NL.</p>
           <div class="body"><ul>
-            <li>Built and scaled an internal data pipeline on MongoDB, splitting stages into their own container deployments (AWS ECS).</li>
+            <li>Built and scaled an internal data ETL tool that processed and merged data in PostgreSQL, then loaded the merged result into MongoDB at the final stage.</li>
+            <li>Fixed scalability by splitting pipeline stages into their own container deployments (AWS ECS).</li>
             <li>Orchestrated it with AWS Step Functions and infrastructure-as-code (CDK); joined the on-call rotation.</li>
-            <li>Used MongoDB as the primary data store across services.</li>
             <li>Researched UI alternatives for the data-transformation tooling.</li>
           </ul></div>
         </div>
@@ -351,7 +350,7 @@
         <div class="detail">
           <p class="meta">Cyberjaya, Malaysia.</p>
           <div class="body"><ul>
-            <li>Built a release manager (on Chef + Slack) that coordinated releases across hundreds of servers (AWS EC2). Led a team of senior PostgreSQL engineers, and ran an in-house git server synced between GitLab and GitHub.</li>
+            <li>Built a release manager (on Chef + Slack) that <b>coordinated company-wide releases across hundreds of servers (AWS EC2)</b>. Led a team of senior PostgreSQL engineers, and ran an in-house git server synced between GitLab and GitHub.</li>
             <li>Migrated the business-intelligence (BI) stack, including a 2 TB reporting database, from company servers to Google Cloud (GCP) with minutes of downtime. Docker Swarm; Metabase + Airflow + BigQuery; cut cloud costs by thousands a month. Tested point-in-time-recovery (PITR) backups and hardened the databases.</li>
             <li>Built integration and automation across Trello, GitHub, and Redmine to streamline tagging and releases. Round-the-clock on-call.</li>
           </ul></div>
@@ -416,7 +415,7 @@
       <div class="node">
         <button class="head" type="button"><span class="date">2016-01</span><span class="subject"><b>@deriv/deriv-api</b>: Deriv WebSocket API</span><span class="chev">›</span></button>
         <div class="detail">
-          <div class="body"><p>Designed and built Deriv's WebSocket API client: a reactive JavaScript library (RxJS) that made the real-time trading API easier to use, plus its documentation. About 5,600 npm downloads a week.</p></div>
+          <div class="body"><p>Designed and built Deriv's WebSocket API client: a reactive JavaScript library (RxJS) that made the real-time trading API easier to use, plus its documentation. <b>Used across all of the company's front-end apps.</b> About 5,600 npm downloads a week.</p></div>
           <div class="links">
             <a class="pill" href="https://www.npmjs.com/package/@deriv/deriv-api" target="_blank" rel="noopener">npm</a>
             <a class="pill" href="https://github.com/binary-com/deriv-api" target="_blank" rel="noopener">repo</a>
